@@ -30,7 +30,7 @@
         <option value="TRANSIT">Transit</option>
       </select>
       </div>
-    <div id="quote"><br>'The greatest threat to our planet is the belief that someone else will save it.' - Robert Swan<br>Let's start by choosing more effitient modes of transport.<br></div>
+    <div id="quote"><br><h4>'The greatest threat to our planet is the belief that someone else will save it.' - Robert Swan'<br>Let's start by choosing more effitient modes of transport.</h4><br></div>
 <div>
   <br>
    <!--  <div class="container my-4">
@@ -46,58 +46,58 @@
  -->
     <div class="card-columns text-white">
       <div class="card text-white indigo mb-3" >
-          <div class="card-header">Driving</div>
+          <div class="card-header"><h2>Driving</h2></div>
           <div class="card-body">
             <h5 class="card-title">Carbon Emissions : {{"{0:.2f}".format(transport_co2['car'])}} grams</h5>
             <p class="card-text text-white">Travel Time : {{transport_times['car']}}<br>Travel Distance: {{transport_distance['car']}} miles</p>
           </div>
         </div>
-      <div class="card mt-2 mb-3 indigo" >
-          <div class="card-header">Bus</div>
+      <div class="card mb-3 indigo" >
+          <div class="card-header"><h2>Bus</h2></div>
           <div class="card-body">
             <h5 class="card-title">Carbon Emissions: {{"{0:.2f}".format(transport_co2['transit'])}} grams</h5>
             <p class="card-text text-white">Travel Time: {{transport_times['transit']}}<br>Travel Distance: {{transport_distance['transit']}} miles</p>
           </div>
       </div>
-      <div class="card mt-2 mb-3 indigo" >
-          <div class="card-header">Biking</div>
+      <div class="card mb-3 indigo" >
+          <div class="card-header"><h2>Biking</h2></div>
           <div class="card-body">
             <h5 class="card-title">Calories Burned: {{transport_kwh['cycle']}} kcal</h5>
             <p class="card-text text-white">Travel Time: {{transport_times['cycling']}}<br>Travel Distance: {{transport_distance['cycling']}} miles</p>
           </div>
       </div>
       <div class="card text-white indigo  mb-3" >
-      <div class="card-header">Walking</div>
+      <div class="card-header"><h2>Walking</h2></div>
       <div class="card-body">
         <h5 class="card-title">Calories Burned: {{transport_kwh['walk']}} kcal</h5>
         <p class="card-text text-white">Travel Time : {{transport_times['walk']}}<br>Travel Distance: {{transport_distance['walk']}} miles</p>
       </div>
     </div>
-    <div class="card orange mt-2 mb-3">
+    <div class="card orange mb-3">
         <div class="card-body">
-          <h5 class="card-title"><b>To:</b> {{start_pos}}<br><br><b>From:</b> {{destination_pos}}<br></h5>
+          <h5 class="card-title"><b>From:</b> {{start_pos}}<br><br><b>To:</b> {{destination_pos}}<br></h5>
           <!-- <p>This is a longer card with supporting text below as a natural lead-in to additional content. This content
             is a little bit longer.</p> -->
         </div>
       </div>
-      <div class="card p-3 mb-3 green">
+      <div class="card mb-3 green">
         <blockquote class="blockquote mb-0 card-body">
           <p>By walking the distance of {{transport_distance['walk']}} miles required for this trip, you would have
           {% if transport_distance['walk'] > 1.5 %}
-            met the daily moderate fitness goal {{"{0:.2f}".format(transport_distance['walk'] / 1.5)}} time! 
+            met the daily moderate fitness goal {{"{0:.2f}".format(transport_distance['walk'] / 1.5)}}X times! 
           {% else %}
-            been at X{{"{0:.2f}".format(transport_distance['walk'] / 1.5)|float * 100}}% towards your daily goal!
+            been at {{"{0:.2f}".format(transport_distance['walk'] / 1.5)|float * 100}}% towards your daily goal!
           {% endif %}
           </p>
         </blockquote>
       </div>
     
 
-    <div class="card p-3 mb-3 green">
+    <div class="card mb-3 green">
         <blockquote class="blockquote mb-0 card-body">
           <p> 
             If you decide to bike instead of driving in your trip, your carbon footprint would be reduced by
-            {{"{0:.2f}".format(transport_co2['car'] / transport_co2['cycle'] * 100)}}% !!!!
+            {{"{0:.2f}".format(transport_co2['car'] / transport_co2['cycle'] * 100)}}% !
             
           </p>
         </blockquote>
@@ -108,13 +108,9 @@
 
   </strong>
     </div>
-
-    <!-- Start your project here-->
-    <div>
-      <p>This is a test</p>
-      </div>
-    <!-- /Start your project here-->
-
+    <div class="col text-center">
+        <button id="search_again" type="button" class="btn btn-primary white">Search Again</button> 
+    </div>
     <!-- SCRIPTS -->
     <!-- JQuery -->
     
@@ -130,6 +126,11 @@
     
 
     <script>
+
+      document.getElementById("search_again").onclick = function () {
+          location.href = "/";
+      };
+
       function initMap() {
         var directionsService = new google.maps.DirectionsService();
         var directionsRenderer = new google.maps.DirectionsRenderer();
