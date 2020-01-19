@@ -30,50 +30,54 @@ class TransportData:
             'car_result' : car_result
         }
 
-def reload_data(self, start = self.__start, end = self.__end):
-    self.__get_data(start, end)
+    def reload_data(self, start = self.__start, end = self.__end):
+        self.__get_data(start, end)
 
-def get_transport_distances(start, end):
+    def get_transport_distances(self, start, end):
 
-    gmaps = googlemaps.Client(key = 'AIzaSyCm5kzVdeaLePWkUoiPqrWGR3mmrmtGezg')
-    now = datetime.now()
-    
-    walk_result = gmaps.directions(start, end, mode = "walking", departure_time = now)
-    cycle_result = gmaps.directions(start, end, mode = "bicycling", departure_time = now)
-    transit_result = gmaps.directions(start, end, mode = "transit", departure_time = now)
-    car_result = gmaps.directions(start, end, mode = "driving", departure_time = now)
+        walkString = self.__transport_data_json['walking_result'][0]["legs"][0]["distance"]["text"]
+        cycleString = self.__transport_data_json['cycle_result'][0]["legs"][0]["distance"]["text"]
+        transitString = self.__transport_data_json['transit_result'][0]["legs"][0]["distance"]["text"]
+        carString = self.__transport_data_json['car_result'][0]["legs"][0]["distance"]["text"]
 
-    walkString = self.__transport_data_json['walking_result'][0]["legs"][0]["distance"]["text"]
-    cycleString = cycle_result[0]["legs"][0]["distance"]["text"]
-    transitString = transit_result[0]["legs"][0]["distance"]["text"]
-    carString = car_result[0]["legs"][0]["distance"]["text"]
+        walkString = walkString[0:-2]
+        cycleString = cycleString[0:-2]
+        transitString = transitString[0:-2]
+        carString = carString[0:-2]
+        
+        walk_decimal = float(walkString.replace(",", ""))
+        cycle_decimal = float(cycleString.replace(",", ""))
+        transit_decimal = float(transitString.replace(",", ""))
+        car_decimal = float(carString.replace(",", ""))
 
-    walkString = walkString[0:-2]
-    cycleString = cycleString[0:-2]
-    transitString = transitString[0:-2]
-    carString = carString[0:-2]
-    
-    walk_decimal = float(walkString.replace(",", ""))
-    cycle_decimal = float(cycleString.replace(",", ""))
-    transit_decimal = float(transitString.replace(",", ""))
-    car_decimal = float(carString.replace(",", ""))
+        results = {
+            "walk": walk_decimal,
+            "cycle": cycle_decimal,
+            "transit": transit_decimal,
+            "car": car_decimal,
+        }
+        return results
 
-    results = {
-        "walk": walk_decimal,
-        "cycle": cycle_decimal,
-        "transit": transit_decimal,
-        "car": car_decimal,
-    }
+    def get_time(self):
+        walkTimeString = self.__transport_data_json['walking_result'][0]["legs"][0]["duration"]["text"]
+        cycleTimeString = self.__transport_data_json['cycle_result'][0]["legs"][0][["duration"]["text"]
+        transitTimeString = self.__transport_data_json['transit_result'][0]["legs"][0]["duration"]["text"]
+        carTimeString = self.__transport_data_json['car_result'][0]["legs"][0]["duration"]["text"]
 
-    return results
-def get_time():
-    pass
+        times = {
+            "walk": walkTimeString,
+            "cycle": cycleTimeString,
+            "transit": transitTimeString,
+            "car": carTimeString,
+        }
 
-def get_co2():
-    pass
 
-def get_kwh():
-    pass
+    def get_co2(self):
+        return dist_to_kWh(self.get_transport_distances(self.__start,self.__end))[1]
+
+    def get_kwh(self):
+        return dist_to_kWh(self.get_transport_distances(self.__start,self.__end))[0]
+        
 
 def dist_to_kWh(dict_co2):
 
