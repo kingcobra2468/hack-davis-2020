@@ -55,8 +55,8 @@
        <div class="card text-white green  mb-3" >
       <div class="card-header">Walking</div>
       <div class="card-body">
-        <h5 class="card-title">Time : 30 minutes</h5>
-        <p class="card-text text-white">Something we will decide to write</p>
+        <h5 class="card-title">Time : {{tranport_times['walk']}}</h5>
+        <p class="card-text text-white">Walking this distance will burn {{transport_kwh['walk']}} calories</p>
       </div>
     </div>
       <div class="card p-3 mb-3 indigo">
@@ -74,8 +74,8 @@
     <div class="card mt-2 mb-3 green" >
       <div class="card-header">Biking</div>
       <div class="card-body">
-        <h5 class="card-title">Time: 498</h5>
-        <p class="card-text text-white">Biking facts, and effiiecy for biking</p>
+        <h5 class="card-title">Time: {{tranport_times['cycling']}}</h5>
+        <p class="card-text text-white">Biking this distance will burn {{transport_kwh['cycle']}} calories</p>
       </div>
     </div>
    
@@ -83,7 +83,7 @@
     <div class="card text-white orange mb-3" >
       <div class="card-header">Driving</div>
       <div class="card-body">
-        <h5 class="card-title">Time : 10 minutes</h5>
+        <h5 class="card-title">Time : {{tranport_times['car']}}</h5>
         <p class="card-text text-white">Carbon Emmsions : X grams<br>The amount of engery consumed to reach x to y is spent in wellmen hall in 3 minutes.</p>
       </div>
     </div>
@@ -92,7 +92,7 @@
     <div class="card mt-2 mb-3 green" >
       <div class="card-header">Bus</div>
       <div class="card-body">
-        <h5 class="card-title">Time: 25 minutes</h5>
+        <h5 class="card-title">Time: {{tranport_times['transit']}}</h5>
         <p class="card-text text-white">Carbon Emissions: <br> Another fact that we want to give resultinn</p>
       </div>
     </div>

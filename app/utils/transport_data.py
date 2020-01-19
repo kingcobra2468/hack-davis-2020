@@ -7,14 +7,13 @@ class TransportData:
 
     def __init__(self, key, start, end):
         
-        #'AIzaSyCm5kzVdeaLePWkUoiPqrWGR3mmrmtGezg'
         self.__key = key
         self.__start = start
         self.__end = end
         self.__gmaps = googlemaps.Client(key = key)
-        self.__get_data()
+        self.__get_data(self.__start, self.__end)
 
-    def __get_data(self, start = self.__start, end = self.__end):
+    def __get_data(self, start, end):
 
         now = datetime.now()
 
@@ -24,19 +23,19 @@ class TransportData:
         car_result = self.__gmaps.directions(self.__start, self.__end, mode = "driving", departure_time = now)
 
         self.__transport_data_json = {
-            'walking_result' : walk_result,
-            'cycle_result' : cycle_result,
+            'walk_result' : walk_result,
+            'cycling_result' : cycle_result,
             'transit_result' : transit_result,
             'car_result' : car_result
         }
 
-    def reload_data(self, start = self.__start, end = self.__end):
+    def reload_data(self, start, end):
         self.__get_data(start, end)
 
     def get_transport_distances(self, start, end):
 
-        walkString = self.__transport_data_json['walking_result'][0]["legs"][0]["distance"]["text"]
-        cycleString = self.__transport_data_json['cycle_result'][0]["legs"][0]["distance"]["text"]
+        walkString = self.__transport_data_json['walk_result'][0]["legs"][0]["distance"]["text"]
+        cycleString = self.__transport_data_json['cycling_result'][0]["legs"][0]["distance"]["text"]
         transitString = self.__transport_data_json['transit_result'][0]["legs"][0]["distance"]["text"]
         carString = self.__transport_data_json['car_result'][0]["legs"][0]["distance"]["text"]
 
@@ -52,25 +51,27 @@ class TransportData:
 
         results = {
             "walk": walk_decimal,
-            "cycle": cycle_decimal,
+            "cycling": cycle_decimal,
             "transit": transit_decimal,
             "car": car_decimal,
         }
         return results
 
-    def get_time(self):
-        walkTimeString = self.__transport_data_json['walking_result'][0]["legs"][0]["duration"]["text"]
-        cycleTimeString = self.__transport_data_json['cycle_result'][0]["legs"][0][["duration"]["text"]
+    def get_times(self):
+        walkTimeString = self.__transport_data_json['walk_result'][0]["legs"][0]["duration"]["text"]
+        cycleTimeString = self.__transport_data_json['cycling_result'][0]["legs"][0]["duration"]["text"]
         transitTimeString = self.__transport_data_json['transit_result'][0]["legs"][0]["duration"]["text"]
         carTimeString = self.__transport_data_json['car_result'][0]["legs"][0]["duration"]["text"]
 
         times = {
             "walk": walkTimeString,
-            "cycle": cycleTimeString,
+            "cycling": cycleTimeString,
             "transit": transitTimeString,
             "car": carTimeString,
         }
 
+        print(times)
+        return times
 
     def get_co2(self):
         return dist_to_kWh(self.get_transport_distances(self.__start,self.__end))[1]
@@ -81,10 +82,11 @@ class TransportData:
 
 def dist_to_kWh(dict_co2):
 
+    print(dict_co2)
     car_distance = dict_co2['car']
     transit_distance = dict_co2['transit']
     #train_distance = dict_co2['train']
-    cycle_distance = dict_co2['cycle']
+    cycle_distance = dict_co2['cycling']
     walk_distance = dict_co2['walk']
 
     car_gallon = car_distance/24.9
@@ -104,18 +106,16 @@ def dist_to_kWh(dict_co2):
 
     car_energy = 36.6* car_gallon
     transit_energy = 36.6 * transit_gallon
-    cycle_energy = cycle_calorie/860420.65
+    cycle_energy = cycle_calorie
     #train_energy = 36.6 * train_gallon
-    walk_energy = walk_calorie/860420.65
+    walk_energy = walk_calorie
 
+    print(f'cals {walk_energy}')
     #dict_energy = {car_energy:'car',transit_energy:'transit',train_energy:'train',cycle_energy:'cycle',walk_energy:'walk'}
     #dict_emission = {car_emission: 'car', transit_emission: 'transit', train_emission: 'train', cycle_emission: 'cycle', walk_emission: 'walk'}
 
-    dict_energy = {'car': car_energy, 'transit': transit_energy, 'cycle': cycle_energy,'walk': walk_energy}
+    dict_energy = {'car': car_energy, 'transit': transit_energy, 'cycle': int(cycle_energy),'walk': int(walk_energy)}
     dict_emission = { 'car': car_emission, 'transit': transit_emission, 'cycle': cycle_emission, 'walk': walk_emission}
 
     ret = [dict_energy,dict_emission]
     return ret
-
-#def get_energy_and_emissions(start,end):
-#    return convert(distanceBetween(start,end))
