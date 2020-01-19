@@ -1,23 +1,83 @@
-{% extends "bootstrap/base.html" %}
-{% block title %}Welcome{% endblock %}
 
 {% block head %}
-<link rel="stylesheet" href="{{ url_for('static', filename='home.css')}}" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="{{ url_for('static', filename='images/icons/favicon.ico')}}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='fonts/font-awesome-4.7.0/css/font-awesome.min.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='fonts/iconic/css/material-design-iconic-font.min.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/animate/animate.css')}}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/css-hamburgers/hamburgers.min.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/animsition/css/animsition.min.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/select2/select2.min.css')}}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/daterangepicker/daterangepicker.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/util.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css')}}">
+
+<!--===============================================================================================-->
 {% endblock %}
 
-{% block content %}
-<div class="row h-100 container justify-content-center align-items-center">
-<form class="border border-light col-6" action="/graphic" method="POST">
+<body>
+	
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100 p-t-85 p-b-20">
+				<form class="login100-form" id="addr_form" action="/graphic" method="POST">
+					<span class="login100-form-title p-b-70">
+					</span>
+					<span class="login100-form-avatar">
+						<img src="{{ url_for('static', filename='images/google-maps-2014-11-12.png')}}">
+					</span>
 
-    <p class="h4 mb-4">Where do you want to go</p>
-    <div class="form-group text-center">
-    <input type="address" id="searchTextField" class="form-control col-lg-6" name="start_pos" placeholder="Start">
-    <input type="address" id="searchTextField" class="form-control col-lg-6" name="destination_pos" placeholder="Destination">
-    </div>
-    <button type="submit" class="btn btn-primary btn-md">explore</button>
-</div>
-{% endblock %}
+					<div class="wrap-input100 m-t-85 m-b-35">
+						<input id="searchTextField1" class="input100" type="text" name="start_pos">
+						<span class="focus-input100" ></span>
+					</div>
 
-{% block body%}
-<link rel="stylesheet" href="{{ url_for('static', filename='home.css')}}" />
-{% endblock %}
+					<div class="wrap-input100 m-b-50">
+						<input id="searchTextField2" class="input100" type="text" name="destination_pos">
+						<span class="focus-input100"></span>
+					</div>
+
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn" type="submit">
+							Go
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+
+<!--===============================================================================================-->
+	<script src="{{ url_for('static', filename='vendor/jquery/jquery-3.2.1.min.js')}}"></script>
+<!--===============================================================================================-->
+	<script src="{{ url_for('static', filename='vendor/animsition/js/animsition.min.js')}}"></script>
+<!--===============================================================================================-->
+	<script src="{{ url_for('static', filename='vendor/bootstrap/js/popper.js')}}"></script>
+	<script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.min.js')}}"></script>
+<!--===============================================================================================-->
+	<script src="{{ url_for('static', filename='vendor/select2/select2.min.js')}}"></script>
+<!--===============================================================================================-->
+	<script src="{{ url_for('static', filename='vendor/daterangepicker/moment.min.js')}}"></script>
+	<script src="{{ url_for('static', filename='vendor/daterangepicker/daterangepicker.js')}}"></script>
+<!--===============================================================================================-->
+	<script src="{{ url_for('static', filename='vendor/countdowntime/countdowntime.js')}}"></script>
+<!--===============================================================================================-->
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC-dtV6daEa4v20nabi4CJkKZX2FPPcTSk&libraries=places&callback=initMap"></script>
+<script src="{{ url_for('static', filename='js/home.js')}}"></script>
+
+</body>
+</html>
