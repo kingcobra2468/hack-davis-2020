@@ -3,6 +3,36 @@ import json
 import googlemaps
 from datetime import datetime
 
+class TransportData:
+
+    def __init__(self, key, start, end):
+        
+        #'AIzaSyCm5kzVdeaLePWkUoiPqrWGR3mmrmtGezg'
+        self.__key = key
+        self.__start = start
+        self.__end = end
+        self.__gmaps = googlemaps.Client(key = key)
+        self.__get_data()
+
+    def __get_data(self, start = self.__start, end = self.__end):
+
+        now = datetime.now()
+
+        walk_result = self.__gmaps.directions(self.__start, self.__end, mode = "walking", departure_time = now)
+        cycle_result = self.__gmaps.directions(self.__start, self.__end, mode = "bicycling", departure_time = now)
+        transit_result = self.__gmaps.directions(self.__start, self.__end, mode = "transit", departure_time = now)
+        car_result = self.__gmaps.directions(self.__start, self.__end, mode = "driving", departure_time = now)
+
+        self.__transport_data_json = {
+            'walking_result' : walk_result,
+            'cycle_result' : cycle_result,
+            'transit_result' : transit_result,
+            'car_result' : car_result
+        }
+
+def reload_data(self, start = self.__start, end = self.__end):
+    self.__get_data(start, end)
+
 def get_transport_distances(start, end):
 
     gmaps = googlemaps.Client(key = 'AIzaSyCm5kzVdeaLePWkUoiPqrWGR3mmrmtGezg')
@@ -13,7 +43,7 @@ def get_transport_distances(start, end):
     transit_result = gmaps.directions(start, end, mode = "transit", departure_time = now)
     car_result = gmaps.directions(start, end, mode = "driving", departure_time = now)
 
-    walkString = walk_result[0]["legs"][0]["distance"]["text"]
+    walkString = self.__transport_data_json['walking_result'][0]["legs"][0]["distance"]["text"]
     cycleString = cycle_result[0]["legs"][0]["distance"]["text"]
     transitString = transit_result[0]["legs"][0]["distance"]["text"]
     carString = car_result[0]["legs"][0]["distance"]["text"]
@@ -36,6 +66,14 @@ def get_transport_distances(start, end):
     }
 
     return results
+def get_time():
+    pass
+
+def get_co2():
+    pass
+
+def get_kwh():
+    pass
 
 def dist_to_kWh(dict_co2):
 
