@@ -55,27 +55,40 @@
        <div class="card text-white green  mb-3" >
       <div class="card-header">Walking</div>
       <div class="card-body">
-        <h5 class="card-title">Time : {{tranport_times['walk']}}</h5>
-        <p class="card-text text-white">Walking this distance will burn {{transport_kwh['walk']}} calories</p>
+        <h5 class="card-title">Calories Burned: {{transport_kwh['walk']}} kcal</h5>
+        <p class="card-text text-white">Travel Time : {{transport_times['walk']}}<br>Travel Distance: {{transport_distance['walk']}} miles</p>
       </div>
     </div>
       <div class="card p-3 mb-3 indigo">
         <blockquote class="blockquote mb-0 card-body">
-          <p>Using the car will result in 100% more fuel emission than taking the bus.</p>
+          <p>By walking the distance of {{transport_distance['walk']}} miles required for this trip, you would have
+          {% if transport_distance['walk'] > 1.5 %}
+            met the daily moderate fitness goal {{"{0:.2f}".format(transport_distance['walk'] / 1.5)}} time! 
+          {% else %}
+            been at X{{"{0:.2f}".format(transport_distance['walk'] / 1.5)|float * 100}}% towards your daily goal!
+          {% endif %}
+          </p>
         </blockquote>
       </div>
     
 
     <div class="card p-3 mb-3 indigo">
         <blockquote class="blockquote mb-0 card-body">
-          <p>Using the car will result in 100% more fuel emission than taking the bus.</p>
+          <p> 
+            If you decide to 
+            {% if transport_distance['walk'] > 1.5 %}
+              met the daily moderate fitness goal {{"{0:.2f}".format(transport_distance['walk'] / 1.5)}} time! 
+            {% else %}
+              been at X{{"{0:.2f}".format(transport_distance['walk'] / 1.5)|float * 100}}% towards your daily goal!
+            {% endif %}
+          </p>
         </blockquote>
       </div>
-    <div class="card mt-2 mb-3 green" >
+    <div  class="card mt-2 mb-3 green" >
       <div class="card-header">Biking</div>
       <div class="card-body">
-        <h5 class="card-title">Time: {{tranport_times['cycling']}}</h5>
-        <p class="card-text text-white">Biking this distance will burn {{transport_kwh['cycle']}} calories</p>
+        <h5 class="card-title">Calories Burned: {{transport_kwh['cycle']}} kcal</h5>
+        <p class="card-text text-white">Travel Time: {{transport_times['cycling']}}<br>Travel Distance: {{transport_distance['cycling']}} miles</p>
       </div>
     </div>
    
@@ -83,8 +96,8 @@
     <div class="card text-white orange mb-3" >
       <div class="card-header">Driving</div>
       <div class="card-body">
-        <h5 class="card-title">Time : {{tranport_times['car']}}</h5>
-        <p class="card-text text-white">Carbon Emmsions : X grams<br>The amount of engery consumed to reach x to y is spent in wellmen hall in 3 minutes.</p>
+        <h5 class="card-title">Carbon Emissions : {{"{0:.2f}".format(transport_co2['car'])}} grams</h5>
+        <p class="card-text text-white">Travel Time : {{transport_times['car']}}<br>Travel Distance: {{transport_distance['car']}} miles</p>
       </div>
     </div>
     
@@ -92,8 +105,8 @@
     <div class="card mt-2 mb-3 green" >
       <div class="card-header">Bus</div>
       <div class="card-body">
-        <h5 class="card-title">Time: {{tranport_times['transit']}}</h5>
-        <p class="card-text text-white">Carbon Emissions: <br> Another fact that we want to give resultinn</p>
+        <h5 class="card-title">Carbon Emissions: {{"{0:.2f}".format(transport_co2['transit'])}} grams</h5>
+        <p class="card-text text-white">Travel Time: {{transport_times['transit']}}<br>Travel Distance: {{transport_distance['transit']}} miles</p>
       </div>
     </div>
     <div class="card p-3 mb-3 indigo">

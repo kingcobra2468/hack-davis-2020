@@ -32,7 +32,7 @@ class TransportData:
     def reload_data(self, start, end):
         self.__get_data(start, end)
 
-    def get_transport_distances(self, start, end):
+    def get_transport_distances(self):
 
         walkString = self.__transport_data_json['walk_result'][0]["legs"][0]["distance"]["text"]
         cycleString = self.__transport_data_json['cycling_result'][0]["legs"][0]["distance"]["text"]
@@ -74,10 +74,10 @@ class TransportData:
         return times
 
     def get_co2(self):
-        return dist_to_kWh(self.get_transport_distances(self.__start,self.__end))[1]
+        return dist_to_kWh(self.get_transport_distances())[1]
 
     def get_kwh(self):
-        return dist_to_kWh(self.get_transport_distances(self.__start,self.__end))[0]
+        return dist_to_kWh(self.get_transport_distances())[0]
         
 
 def dist_to_kWh(dict_co2):
