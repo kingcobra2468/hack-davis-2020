@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Material Design Bootstrap</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Bootstrap core CSS -->
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="{{ url_for('static', filename='css/mdb.min.css')}}" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="{{ url_for('static', filename='css/style.css')}}" rel="stylesheet">
+
+    <style type="text/css">
+    .map_position{
+      background-color: black;
+      color:white;
+      height:200px;
+      align-items: center;
+      align-content: center;
+
+    }
+    body{
+      background-color:white ;
+    }
+    #quote{
+      color:black;
+      font-family: "Times New Roman", Times, serif;
+      font-style: bold;
+
+      font-style: italic;
+
+
+      text-align: center;
+    }
+     
+  
+
+    
+  </style>
+  </head>
+
+  <body >
+    <div id="map" style="width: 100%; height: 400px;"></div>
+    <div>
+      <strong>Mode of Travel: </strong>
+      <select id="mode">
+        <option value="DRIVING">Driving</option>
+        <option value="WALKING">Walking</option>
+        <option value="BICYCLING">Bicycling</option>
+        <option value="TRANSIT">Transit</option>
+      </select>
+      </div>
+    <div id="quote"><br>'The greatest threat to our planet is the belief that someone else will save it.' - Robert Swan<br>Let's start by choosing more effitient modes of transport.<br></div>
+<div>
+  <br>
+   <!--  <div class="container my-4">
+
+      <p class="font-weight-bold">Bootstrap tiles provide a flexible and extensible content container with multiple
+        variants. </p>
+
+      <p><strong>Detailed documentation and more examples of Bootstrap feed you can find in our <a href="https://mdbootstrap.com/docs/jquery/components/panels/" target="_blank">Bootstrap Panels Docs</a>.</strong></p><strong>
+
+    <hr class="my-5">
+
+    <h2 class="my-5 h2">Tile columns</h2>
+ -->
+    <div class="card-columns text-white">
+      <div class="card mt-2 mb-3 blue">
+        <div class="card-body">
+          <h5 class="card-title">To:  <br><br>From: <br></h5>
+          <!-- <p>This is a longer card with supporting text below as a natural lead-in to additional content. This content
+            is a little bit longer.</p> -->
+        </div>
+      </div>
+       <div class="card text-white green  mb-3" >
+      <div class="card-header">Walking</div>
+      <div class="card-body">
+        <h5 class="card-title">Time : 30 minutes</h5>
+        <p class="card-text text-white">Something we will decide to write</p>
+      </div>
+    </div>
+      <div class="card p-3 mb-3 indigo">
+        <blockquote class="blockquote mb-0 card-body">
+          <p>Using the car will result in 100% more fuel emission than taking the bus.</p>
+        </blockquote>
+      </div>
+    
+
+    <div class="card p-3 mb-3 indigo">
+        <blockquote class="blockquote mb-0 card-body">
+          <p>Using the car will result in 100% more fuel emission than taking the bus.</p>
+        </blockquote>
+      </div>
+    <div class="card mt-2 mb-3 green" >
+      <div class="card-header">Biking</div>
+      <div class="card-body">
+        <h5 class="card-title">Time: 498</h5>
+        <p class="card-text text-white">Biking facts, and effiiecy for biking</p>
+      </div>
+    </div>
+   
+   
+    <div class="card text-white orange mb-3" >
+      <div class="card-header">Driving</div>
+      <div class="card-body">
+        <h5 class="card-title">Time : 10 minutes</h5>
+        <p class="card-text text-white">Carbon Emmsions : X grams<br>The amount of engery consumed to reach x to y is spent in wellmen hall in 3 minutes.</p>
+      </div>
+    </div>
+    
+   
+    <div class="card mt-2 mb-3 green" >
+      <div class="card-header">Bus</div>
+      <div class="card-body">
+        <h5 class="card-title">Time: 25 minutes</h5>
+        <p class="card-text text-white">Carbon Emissions: <br> Another fact that we want to give resultinn</p>
+      </div>
+    </div>
+    <div class="card p-3 mb-3 indigo">
+        <blockquote class="blockquote mb-0 card-body">
+          <p>Using the car will result in 100% more fuel emission than taking the bus.</p>
+        </blockquote>
+      </div>
+    
+  
+    </div>
+</div>
+
+  </strong>
+    </div>
+
+    <!-- Start your project here-->
+
+    <!-- /Start your project here-->
+
+    <!-- SCRIPTS -->
+    <!-- JQuery -->
+    
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.3.1.min.js')}}" ></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/popper.min.js')}}" ></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js')}}" ></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/mdb.min.js')}}" ></script>
+    <script type="text/javascript" src="{{url_for('static', filename='js/graph.js')}}"></script>
+    <!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC-dtV6daEa4v20nabi4CJkKZX2FPPcTSk&callback=initMap"></script> -->
+    
+
+    <script>
+      function initMap() {
+        var directionsService = new google.maps.DirectionsService();
+        var directionsRenderer = new google.maps.DirectionsRenderer();
+        var cycleRenderer = new google.maps.DirectionsRenderer();
+        var transitRenderer = new google.maps.DirectionsRenderer();
+      
+        var davis = new google.maps.LatLng(38.5569785, -121.778473,12.63);
+        var mapOptions = {
+          zoom:7,
+          center: davis
+        }
+        var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+        directionsRenderer.setMap(map);
+        cycleRenderer.setMap(map);
+        transitRenderer.setMap(map);
+      
+        var onChangeHandler = function() {
+                calcRoute(directionsService, directionsRenderer, cycleRenderer, transitRenderer);
+              };
+        document.getElementById('mode').addEventListener('change', onChangeHandler);
+      
+        
+      }
+      
+      function calcRoute(directionsService, directionsRenderer) {
+        var start = "UC Davis";
+        var end = "Davis DMV";
+      
+        //var travelModes = ["DRIVING", "BICYCLING", "TRANSIT"];
+        var travelMode = document.getElementById('mode').value;
+          var request = {
+            origin: start,
+            destination: end,
+            travelMode: travelMode
+          };
+          directionsService.route(request, function(result, status) {
+          if (status == 'OK') {
+            directionsRenderer.setDirections(result);
+          }
+        });
+      
+      }
+          </script>
+          <!--Load the API from the specified URL
+          * The async attribute allows the browser to render the page while the API loads
+          * The key parameter will contain your own API key (which is not needed for this tutorial)
+          * The callback parameter executes the initMap() function
+          -->
+          <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC-dtV6daEa4v20nabi4CJkKZX2FPPcTSk&callback=initMap">
+            //calcRoute();
+          </script>
+      
+      
+  </body>
+  
+
+</html>
