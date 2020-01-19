@@ -1,0 +1,23 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}Welcome{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='home.css')}}" />
+{% endblock %}
+
+{% block content %}
+<div class="row h-100 container justify-content-center align-items-center">
+<form class="border border-light col-6" action="/graphic" method="POST">
+
+    <p class="h4 mb-4">Where do you want to go</p>
+    <div class="form-group text-center">
+    <input type="address" id="searchTextField" class="form-control col-lg-6" name="start_pos" placeholder="Start">
+    <input type="address" id="searchTextField" class="form-control col-lg-6" name="destination_pos" placeholder="Destination">
+    </div>
+    <button type="submit" class="btn btn-primary btn-md">explore</button>
+</div>
+{% endblock %}
+
+{% block body%}
+<link rel="stylesheet" href="{{ url_for('static', filename='home.css')}}" />
+{% endblock %}
