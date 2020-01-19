@@ -1,1 +1,0 @@
-curl -X POST -F "img1=@/home/erik/Media/Pictures/aircraft-balloon-ballooning-36487.jpg" -F "img2=@/home/erik/Media/Pictures/aircraft-balloon-ballooning-3648722.jpeg" http://127.0.0.1:5000/image-ops/test
