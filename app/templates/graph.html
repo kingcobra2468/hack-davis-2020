@@ -5,8 +5,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Material Design Bootstrap</title>
+    <title>Greenify</title>
     <!-- Font Awesome -->
+    {% block head %}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Bootstrap core CSS -->
     <link href="{{ url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet">
@@ -14,34 +15,8 @@
     <link href="{{ url_for('static', filename='css/mdb.min.css')}}" rel="stylesheet">
     <!-- Your custom styles (optional) -->
     <link href="{{ url_for('static', filename='css/style.css')}}" rel="stylesheet">
-
-    <style type="text/css">
-    .map_position{
-      background-color: black;
-      color:white;
-      height:200px;
-      align-items: center;
-      align-content: center;
-
-    }
-    body{
-      background-color:white ;
-    }
-    #quote{
-      color:black;
-      font-family: "Times New Roman", Times, serif;
-      font-style: bold;
-
-      font-style: italic;
-
-
-      text-align: center;
-    }
-     
-  
-
-    
-  </style>
+    <link href="{{ url_for('static', filename='css/graph.css')}}" rel="stylesheet">
+    {% endblock %}
   </head>
 
   <body >
@@ -72,7 +47,7 @@
     <div class="card-columns text-white">
       <div class="card mt-2 mb-3 blue">
         <div class="card-body">
-          <h5 class="card-title">To:  <br><br>From: <br></h5>
+          <h5 class="card-title">To: {{start_pos}}<br><br>From: {{destination_pos}}<br></h5>
           <!-- <p>This is a longer card with supporting text below as a natural lead-in to additional content. This content
             is a little bit longer.</p> -->
         </div>
@@ -178,8 +153,8 @@
       }
       
       function calcRoute(directionsService, directionsRenderer) {
-        var start = "UC Davis";
-        var end = "Davis DMV";
+        var start = "{{start_pos}}";
+        var end = "{{destination_pos}}";
       
         //var travelModes = ["DRIVING", "BICYCLING", "TRANSIT"];
         var travelMode = document.getElementById('mode').value;
@@ -196,11 +171,6 @@
       
       }
           </script>
-          <!--Load the API from the specified URL
-          * The async attribute allows the browser to render the page while the API loads
-          * The key parameter will contain your own API key (which is not needed for this tutorial)
-          * The callback parameter executes the initMap() function
-          -->
           <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC-dtV6daEa4v20nabi4CJkKZX2FPPcTSk&callback=initMap">
             //calcRoute();
@@ -208,6 +178,5 @@
       
       
   </body>
-  
 
 </html>
