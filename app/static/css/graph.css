@@ -1,0 +1,21 @@
+.map_position{
+    background-color: black;
+    color:white;
+    height:200px;
+    align-items: center;
+    align-content: center;
+
+  }
+  body{
+    background-color:white ;
+  }
+  #quote{
+    color:black;
+    font-family: "Times New Roman", Times, serif;
+    font-style: bold;
+
+    font-style: italic;
+
+
+    text-align: center;
+  }
