@@ -6,9 +6,9 @@ app = Flask(__name__)
 app.register_blueprint(home_blueprint)
 app.register_blueprint(graphic_blueprint)
 
-# @app.route('/graph')
-# def makingMap():
-#     return render_template("graph.html")
+@app.route('/buildingData')
+def makingMap():
+    return render_template("buildingData.html")
 
 if __name__ == "__main__":
     Bootstrap(app)

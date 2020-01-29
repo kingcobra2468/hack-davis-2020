@@ -9,7 +9,7 @@ def feed():
 
     start_pos = request.form["start_pos"]
     destination_pos = request.form["destination_pos"]
-    transport_data = TransportData("AIzaSyCm5kzVdeaLePWkUoiPqrWGR3mmrmtGezg", start_pos, destination_pos)
+    transport_data = TransportData("AIzaSyA4K_xT8HA6_6J83PUaaEdH_1SgqXITxpU", start_pos, destination_pos)
 
     #get_transport_distances(start_pos, destination_pos)
     return render_template('graph.html', start_pos = start_pos, destination_pos = destination_pos, transport_distance = transport_data.get_transport_distances(),
