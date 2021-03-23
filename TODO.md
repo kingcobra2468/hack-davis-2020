@@ -4,7 +4,10 @@
 
 ---
 ### Repo Wide
-- [ ] Added documentation/comments throughout the repo
+- [ ] Added documentation/comments throughout the repo.
+
+### Frontend
+- [ ] Clean up the dead css/js files.
 
 ## **Completed Tasks**
 
